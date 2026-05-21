@@ -1,0 +1,20 @@
+{
+  "platform": "meta_ads",
+  "campaign_objective": "lead_generation",
+  "daily_budget_test": 40,
+  "currency": "USD",
+  "audience_type": "lookalike_or_narrow_interest",
+  "audience_breadth": "narrow",
+  "optimisation": "lead_form_completion",
+  "destination_url": "/custom-strategy",
+  "kill_threshold": {
+    "clicks": 100,
+    "cpl_multiple_of_target": 2
+  },
+  "scale_threshold": {
+    "consecutive_days_under_target": 7
+  },
+  "creative_sizes": ["1080x1080", "1080x1350"],
+  "creative_count": 10,
+  "copy_variant_count": 10
+}

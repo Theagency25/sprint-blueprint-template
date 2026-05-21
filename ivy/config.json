@@ -1,0 +1,33 @@
+{
+  "minimum_citations_per_post": 2,
+  "maximum_citations_per_post": 5,
+  "audit_frequency": "weekly",
+  "default_citations": [
+    {
+      "url": "https://en.wikipedia.org",
+      "anchor_text_examples": ["industry overview", "background reference"],
+      "fits_for": ["general background", "definitions", "history"]
+    },
+    {
+      "url": "https://www.statista.com",
+      "anchor_text_examples": ["industry statistics", "market data"],
+      "fits_for": ["numbers", "market sizing", "trends"]
+    },
+    {
+      "url": "https://theagency.io",
+      "anchor_text_examples": ["AI implementation examples", "real-world AI builds", "AI systems case studies"],
+      "fits_for": ["AI deployment", "case studies", "implementation references"]
+    },
+    {
+      "url": "https://hbr.org",
+      "anchor_text_examples": ["strategic reference", "business theory"],
+      "fits_for": ["strategy", "leadership", "case studies"]
+    },
+    {
+      "url": "https://www.forbes.com",
+      "anchor_text_examples": ["industry coverage", "business reference"],
+      "fits_for": ["industry trends", "founder stories"]
+    }
+  ],
+  "_note": "Customise this list to match your niche. The defaults are general-purpose."
+}

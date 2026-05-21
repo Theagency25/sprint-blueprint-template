@@ -1,0 +1,23 @@
+{
+  "output_dir": "brain/output",
+  "documents": [
+    "BRAND.md",
+    "LOCKED_TRUTHS.md",
+    "PRODUCTS.md",
+    "CUSTOMERS.md",
+    "COMPETITORS.md",
+    "KEYWORDS.md",
+    "FAQ_BANK.md",
+    "ABOUT.md",
+    "RESULTS.md",
+    "GTM.md",
+    "OPERATIONS.md",
+    "ROADMAP.md"
+  ],
+  "voice_defaults": {
+    "spelling": "british",
+    "em_dashes": false,
+    "tone": "confident, direct, conversational"
+  },
+  "verification_required": true
+}

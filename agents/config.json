@@ -1,0 +1,22 @@
+{
+  "channels": [
+    "instagram_dm",
+    "facebook_dm",
+    "website_chat",
+    "whatsapp"
+  ],
+  "claude_model_default": "claude-haiku-4-5",
+  "claude_model_complex": "claude-sonnet-4-6",
+  "max_chars_per_message": 140,
+  "max_sentences_per_message": 2,
+  "log_to_crm_as_note": true,
+  "qualified_lead_destination": "/custom-strategy",
+  "calendar_link_source": "brain/output/OPERATIONS.md",
+  "banned_formatting": {
+    "em_dashes": false,
+    "en_dashes": false,
+    "markdown": false,
+    "emojis": false,
+    "apologies": false
+  }
+}

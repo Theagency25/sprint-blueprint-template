@@ -1,0 +1,24 @@
+{
+  "crm": "gohighlevel",
+  "ghl_location_id": "",
+  "ghl_api_key_env_var": "GHL_API_KEY",
+  "custom_field_keys": {
+    "q1_biggest_challenge": "cs_q1",
+    "q2_monthly_leads": "cs_q2",
+    "q3_lead_handling": "cs_q3",
+    "q4_avg_client_value": "cs_q4",
+    "q5_monthly_revenue": "cs_q5"
+  },
+  "tag_on_complete": "strategy_complete",
+  "form_type": "custom_strategy",
+  "quiz_steps": {
+    "questions": 5,
+    "contact_steps": 3,
+    "loading_step": true,
+    "thank_you_step": true
+  },
+  "ui": {
+    "progress_bar": true,
+    "one_field_per_screen": true
+  }
+}

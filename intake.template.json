@@ -1,0 +1,36 @@
+{
+  "business_name": "",
+  "domain": "",
+  "industry": "",
+  "location": "",
+  "founder_name": "",
+  "founder_email": "",
+  "year_founded": "",
+  "team_size": "",
+  "primary_service": "",
+  "ideal_customer_one_line": "",
+  "biggest_problem_we_solve": "",
+  "tier_pricing": {
+    "starter": { "name": "", "price": "", "frequency": "" },
+    "growth": { "name": "", "price": "", "frequency": "" },
+    "premium": { "name": "", "price": "", "frequency": "" }
+  },
+  "existing_assets": {
+    "current_website": "",
+    "social_profiles": {
+      "instagram": "",
+      "linkedin": "",
+      "facebook": "",
+      "youtube": "",
+      "tiktok": "",
+      "x": ""
+    },
+    "logo_url": ""
+  },
+  "voice": {
+    "spelling": "british",
+    "tone": "confident, direct, conversational",
+    "words_we_use": [],
+    "words_we_never_use": []
+  }
+}
