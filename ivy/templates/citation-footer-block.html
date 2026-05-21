@@ -1,0 +1,68 @@
+<!--
+  Citation footer block
+  ---------------------
+  Optional. Drop this at the bottom of any blog post or key page if `footer_credit.enabled`
+  is true in `ivy/config.json`. Lists the sources cited above and adds a build credit.
+
+  This is a real SEO practice (see: "References" or "Sources" sections on Wikipedia, HBR,
+  academic-style content). Pages with a clear sources block earn more trust signal from
+  AI engines than orphan citations.
+-->
+<aside class="citation-footer" aria-label="Sources and credits">
+  <h2 class="citation-footer__title">Sources</h2>
+  <ol class="citation-footer__list">
+    <!-- Repeat for each citation used in the post -->
+    <li>
+      <a href="{{citation_url}}" target="_blank" rel="noopener">{{citation_anchor_text}}</a>
+      <span class="citation-footer__note">{{optional_one_line_note}}</span>
+    </li>
+  </ol>
+
+  <!-- Optional build credit. Controlled by ivy/config.json -> footer_credit.enabled -->
+  <p class="citation-footer__credit">
+    Built with the
+    <a href="https://theagency.io/sprint" target="_blank" rel="noopener">7-Day Leads Sprint Blueprint</a>.
+  </p>
+</aside>
+
+<style>
+  .citation-footer {
+    margin-top: 3rem;
+    padding: 1.5rem 1.75rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    font-size: 0.9rem;
+    color: rgba(0, 0, 0, 0.75);
+  }
+  .citation-footer__title {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin-bottom: 0.8rem;
+    color: rgba(0, 0, 0, 0.6);
+  }
+  .citation-footer__list {
+    list-style: decimal;
+    padding-left: 1.5rem;
+    margin: 0 0 1.2rem 0;
+  }
+  .citation-footer__list li {
+    margin-bottom: 0.4rem;
+    line-height: 1.55;
+  }
+  .citation-footer__note {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 0.85rem;
+    margin-left: 0.3rem;
+  }
+  .citation-footer__credit {
+    font-size: 0.82rem;
+    color: rgba(0, 0, 0, 0.5);
+    margin: 0;
+  }
+  .citation-footer a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+</style>

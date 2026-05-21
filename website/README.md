@@ -1,35 +1,45 @@
-# 02 · Website
+# Website
 
-Ship the AI-search-optimised site on auto-deploy from GitHub to Netlify. Built right, this ranks inside 30 days.
+A high-level checklist of what your website needs to rank for both Google and AI search engines.
 
-## Stack
+This folder is **instructions, not a build kit**. It tells you what good looks like and the minimum bar to clear. The actual build methodology is part of how we run a Sprint with our clients.
 
-- **GitHub** — source of truth, every commit triggers a build
-- **Netlify** — auto-deploy on push, free SSL, edge functions
-- **Astro + Tailwind + pnpm** — fast static site, React only where you need interactivity
+## What good looks like
 
-## What you get out
+### Hosting + deploy
+- Source in GitHub, hosted on Netlify, auto-deploy on every commit
+- SSL on by default (Netlify includes it free)
 
-A live site at your domain with:
+### Pages (minimum)
+- Homepage, About, Services (overview + one per service), Results / Testimonials
+- Contact, FAQ (standalone), Blog with 3+ starter posts
+- Privacy and Terms (required by Google)
+- A lead-capture page (see [`custom-strategy/`](../custom-strategy/))
 
-- All required pages (homepage, about, services overview + one per service, results, contact, FAQ, blog, privacy, terms)
-- `robots.txt` allowing 200+ AI crawlers
-- `llms.txt` naming priority pages for AI engines
-- JSON-LD schema on every page (Organization, FAQPage, LocalBusiness)
+### Every page must have
+- One H1, primary keyword first, under 60 characters
 - 120-180 word sections between H2s (the AI citation sweet spot)
-- 40-word FAQ answers
-- Microsoft Clarity + Search Console + GA4 wired
+- An FAQ section with 5+ questions and ~40-word answers
+- JSON-LD schema in the head (at minimum Organization + WebPage; FAQPage on every FAQ)
+- A primary CTA above the fold and repeated every 2-3 sections
 
-## Run it
+### Three files most builders miss
+- `public/robots.txt` allowing 200+ AI crawlers. A working template lives in [`templates/robots.txt`](./templates/robots.txt) — copy it as-is, change the sitemap URL.
+- `public/llms.txt` naming your priority pages so AI engines know what to cite
+- `public/sitemap.xml` — and submit it to **both Google Search Console and Bing Webmaster Tools**. ChatGPT Search pulls from Bing, not Google. This is the single biggest miss most agencies make.
 
-1. Make sure `../brain/output/` is complete first
-2. Open `prompts/02-website-build.md`
-3. Paste into Claude Code with this repo open
-4. Claude reads `brain/output/` and builds every page
+### Tracking
+- Microsoft Clarity (free heatmaps + session recordings)
+- Google Search Console (query data)
+- Google Analytics 4 (conversion tracking)
 
-## Watch out for
+### Citations
+Every blog post and key page should include 2-3 outbound citations. This is one of the strongest AI search ranking signals. See [`../ivy/`](../ivy/) — the only full skill in this repo — for how to manage them.
 
-- Stock photos, template defaults, "sound familiar?" copy. Strip all of it.
-- Sections shorter than 120 words. AI engines need the density to cite.
-- Missing schema. Every page needs at least Organization + WebPage.
-- Forgetting to submit the sitemap to **Bing Webmaster Tools**. ChatGPT Search pulls from Bing, not Google.
+## Stack we recommend
+
+Astro + Tailwind + pnpm. Any modern static site generator works (Next.js, SvelteKit, Eleventy). Pick what your team already knows.
+
+## Want it built for you?
+
+We ship a full Sprint build in seven days. **https://theagency.io/sprint**

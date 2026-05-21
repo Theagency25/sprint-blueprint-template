@@ -1,0 +1,120 @@
+# robots.txt — AI search optimisation
+# Allow every major AI crawler. AI search engines are an increasingly large
+# share of traffic; blocking them is a 30%+ traffic loss waiting to happen.
+
+# Standard search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: Yandex
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+# OpenAI (ChatGPT + ChatGPT Search)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic (Claude)
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Google AI (Bard, Gemini, AI Overviews)
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GoogleOther
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Microsoft AI (Copilot)
+User-agent: BingPreview
+Allow: /
+
+# xAI (Grok)
+User-agent: xAI
+Allow: /
+
+# Meta AI
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+# Apple AI
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Cohere
+User-agent: cohere-ai
+Allow: /
+
+# Amazon Alexa / Amazonbot
+User-agent: Amazonbot
+Allow: /
+
+# Mistral
+User-agent: MistralAI
+Allow: /
+
+# Common Crawl (powers many LLM training sets)
+User-agent: CCBot
+Allow: /
+
+# DiffBot (powers AI search)
+User-agent: Diffbot
+Allow: /
+
+# Bytedance (Doubao, TikTok AI)
+User-agent: Bytespider
+Allow: /
+
+# YouBot
+User-agent: YouBot
+Allow: /
+
+# AI2 (Allen Institute)
+User-agent: AI2Bot
+Allow: /
+
+User-agent: Ai2Bot-Dolma
+Allow: /
+
+# Generic catch-all (allow everything else)
+User-agent: *
+Allow: /
+
+# Sitemaps (update the URL to your domain)
+Sitemap: https://YOUR-DOMAIN.com/sitemap-index.xml

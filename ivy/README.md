@@ -1,31 +1,55 @@
-# + · Ivy — outbound citation governance
+# Ivy — outbound citation governance
+
+**The only full skill in this repo.** Everything else is high-level instructions.
 
 Every blog post and key page needs 2-3 outbound citations to high-authority sources. This is one of the strongest AI search ranking signals: pages that cite verified sources get cited more than orphan pages.
 
-Ivy manages this — a curated list of outbound citations, where they fit in your content, and an audit that flags pages missing them.
+Ivy manages this end-to-end.
 
-## What it produces
+## The research
 
-- A `ivy/citations.json` of approved citation sources (with anchor text + context)
-- Suggested citation placements for every new blog post you write
-- A weekly audit listing any published page with fewer than 2 outbound citations
+- Source citation: **+30% AI search visibility**
+- Statistical integration with named sources: **+30-40%**
+- Quotation addition with attribution: **+40%**
 
-## Run it
+Princeton + Georgia Tech 2023-2025 GEO research. See `SKILL.md` for the source link.
 
-1. Open `ivy/config.json` — review the default citation list, add your own, remove any that do not match your niche
-2. Open `prompts/07-ivy-audit.md` and run on every new blog post
-3. Run the audit weekly to catch any drift
+## Three modes (run them when needed)
 
-## Why this matters
+### 1. Write a new blog post with citations woven in
+`prompts/07-ivy-write.md` → paste a topic, get a full draft with 2-3 citations placed naturally.
 
-The Princeton/Georgia Tech 2025 GEO research found:
+### 2. Insert citations into an existing draft
+`prompts/08-ivy-insert.md` → paste an existing post, get suggestions for where to add citations + rewritten sentences.
 
-- Source citation: +30% AI visibility
-- Statistical integration with named sources: +30-40% AI visibility
-- Quotation addition with attribution: +40% AI visibility
+### 3. Audit every published page
+`prompts/09-ivy-audit.md` → walks `website/src/`, flags any page with fewer than 2 citations or generic anchor text.
 
-Pages that cite credibly are cited credibly. The compounding starts there.
+## What's in this folder
 
-## Customise
+- `SKILL.md` — full skill definition
+- `config.json` — the approved citation list + anchor-text rules
+- `prompts/` — 3 ready-to-use Claude prompts
+- `templates/` — citation footer block, JSON-LD `Citation` schema example
 
-Edit `ivy/citations.json` to match your niche. The defaults are general-purpose. For a fitness site, swap in fitness journals. For a legal site, swap in case-law references. Two to three citations per blog post is the sweet spot.
+## Setup
+
+1. Open `config.json` — review the 7 default citations
+2. Customise to your niche (fitness journals for fitness, case law for legal, etc.)
+3. Keep 5-10 approved sources total
+4. Decide if you want the footer credit (`footer_credit.enabled`) — default off
+5. Run mode 1 on your next blog post
+
+## Citation rules
+
+| Rule | Why |
+|---|---|
+| 2-3 citations per blog post | The sweet spot |
+| Anchor text 2-6 words, descriptive | Generic anchors waste the ranking signal |
+| Mix citation types (statistical, authoritative, case study) | Reads as more credible |
+| No more than 2 links to the same source per post | Avoids looking like a paid placement |
+| Add JSON-LD `Citation` schema | AI engines parse this directly |
+
+## Want help setting this up?
+
+We run the full Sprint (website + custom strategy + email retargeting + Ivy) for businesses in seven days. **https://theagency.io/sprint**

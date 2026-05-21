@@ -1,0 +1,36 @@
+{
+  "_comment": "Citation JSON-LD schema. Add inside <script type='application/ld+json'> in the page head OR at the end of the blog post body. AI engines (ChatGPT, Perplexity, Gemini, Claude) parse this directly and weight it heavily for ranking. Replace placeholders with real values per post.",
+
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "{{post_title}}",
+  "datePublished": "{{YYYY-MM-DD}}",
+  "dateModified": "{{YYYY-MM-DD}}",
+  "author": {
+    "@type": "Person",
+    "name": "{{author_name}}",
+    "url": "{{author_url}}"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{business_name}}",
+    "url": "{{business_url}}"
+  },
+  "citation": [
+    {
+      "@type": "WebPage",
+      "url": "{{citation_1_url}}",
+      "name": "{{citation_1_anchor_text}}"
+    },
+    {
+      "@type": "WebPage",
+      "url": "{{citation_2_url}}",
+      "name": "{{citation_2_anchor_text}}"
+    }
+  ],
+  "isPartOf": {
+    "@type": "Blog",
+    "name": "{{blog_name}}",
+    "url": "{{blog_url}}"
+  }
+}

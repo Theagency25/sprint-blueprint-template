@@ -1,25 +1,35 @@
-# 03 · Custom strategy
+# Custom strategy
 
-A 5-question interactive quiz at `/custom-strategy`. Captures a lead with full context. Each answer becomes a custom field on the CRM contact. Without this, every downstream email is generic.
+A short interactive quiz on your site that turns a visitor into a qualified lead with full context.
 
-## What you get out
+This folder is **instructions, not a build kit**. It outlines what to build at a high level. The exact question design, function code, and CRM integration is the work we do with Sprint clients.
 
-- A multi-step React quiz in the website (one screen per step)
-- A Netlify function that upserts to GoHighLevel via the contacts API
-- Custom fields on the contact for every answer
-- Lead tagged `strategy_complete` so the email sequence fires next
+## What you are building
 
-## Run it
+A multi-step quiz at `/custom-strategy` (or `/start`, whatever you prefer).
 
-1. Make sure `../website/` is live and deployed
-2. Sign up for GoHighLevel and create a sub-account
-3. Build 5 custom fields in the GHL custom-fields UI (one per question)
-4. Open `prompts/03-quiz-build.md`
-5. Paste into Claude Code
+- Five short questions tuned to your niche — biggest challenge, current volume, what they have tried, value, revenue
+- Three split contact steps (one field per screen): first name, then email, then phone
+- A loading animation between submit and thank-you so the wait feels intentional
+- A real thank-you screen with clear next-step expectations
 
-## Watch out for
+## Why it's the primary CTA
 
-- Long single forms (every extra field on one screen drops conversion ~10%)
-- No progress bar (people drop off if they cannot see how far)
-- Contact fields stacked on one screen. Split first name / email / phone into separate screens.
-- Forgetting to mark the lead with `strategy_complete` — the next skill depends on it
+Without these answers, every downstream email is generic. With them, your follow-up sequence can quote the prospect back to themselves in their own language. Generic sequences are dying. Personalised ones based on real answers convert.
+
+## The non-negotiables
+
+- Multi-step, never a single long form (each extra field on one screen drops conversion ~10%)
+- Progress bar visible from step 1
+- Mobile-first (most leads are on a phone)
+- Every answer captured as a custom field on the contact record, not as a free-text note
+- Each lead auto-tagged so the next workflow (the email sequence) fires cleanly
+- A clean handoff to whatever email tool you use next (see [`../email-retargeting/`](../email-retargeting/))
+
+## What to build it with
+
+Whatever stack you already have. A React component inside a static page works well. The form's `onSubmit` should POST to a small serverless function that talks to your CRM.
+
+## Want it built for you?
+
+We design and build this quiz for every Sprint client. **https://theagency.io/sprint**

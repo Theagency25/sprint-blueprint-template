@@ -1,64 +1,42 @@
 # 7-Day Leads Sprint Blueprint
 
-The exact 5-step system to get a business ranking on Google + AI search, converting visitors, and bringing in leads inside 30 days. Build it in seven days with Claude.
+The system used to get a business ranking on Google + AI search, converting visitors, and bringing in leads inside 30 days.
 
-This is a GitHub Template. Click **Use this template** at the top of the repo to fork your own copy.
+This is a **GitHub Template**. Click **Use this template** at the top to fork your own copy.
 
 Full blueprint and explainer: **https://theagency.io/sprint**
 
-## The seven modules
+## What this repo gives you
 
-| # | Module | Folder | Job |
-|---|---|---|---|
-| 01 | Brain | [`brain/`](./brain/) | Knowledge base every other module reads from |
-| 02 | Website | [`website/`](./website/) | Ship the AI-search-optimised site on auto-deploy |
-| 03 | Custom strategy | [`custom-strategy/`](./custom-strategy/) | Capture leads with a 5-question multi-step quiz |
-| 04 | Email retargeting | [`email-retargeting/`](./email-retargeting/) | Send 10 personalised emails per lead |
-| 05 | Ads | [`ads/`](./ads/) | Drive paid traffic if organic is not there yet |
-| + | Agents | [`agents/`](./agents/) | 24/7 qualify on social, chat, inbox |
-| + | Ivy | [`ivy/`](./ivy/) | Manage outbound citations (real AI-search ranking signal) |
+A clean starting structure for the build, plus one full working skill (Ivy).
 
-## How each folder works
-
-Every skill folder ships with the same shape:
-
-- `SKILL.md` — what it does, when to use it, inputs and outputs
-- `README.md` — quick-start for a human
-- `config.json` — every tenant-specific value (URLs, brand colours, tier prices)
-- `prompts/` — one file per Claude prompt this skill uses
-
-Never hardwire values into prompts. Read from `config.json` so the same skill works for any business.
-
-## The order to run them in
-
-| Day | Module |
+| Folder | What's in it |
 |---|---|
-| 1 | Brain. Twelve docs in `brain/output/`. Nothing else. |
-| 2-3 | Website. Astro + Tailwind on Netlify, auto-deploy from GitHub. robots.txt + llms.txt + schema + FAQ. |
-| 4-5 | Custom strategy. React quiz + Netlify function + CRM upsert. |
-| 5-6 | Email retargeting. 10-email generation in the function, CRM workflow. |
-| 7 | Ads (if you need traffic) or Agents. |
+| [`website/`](./website/) | High-level checklist for the website (the bar you need to clear) |
+| [`custom-strategy/`](./custom-strategy/) | High-level instructions for the lead-capture quiz |
+| [`email-retargeting/`](./email-retargeting/) | High-level instructions for the personalised follow-up sequence |
+| [`ivy/`](./ivy/) | **Full working skill** — outbound citation governance for AI search ranking |
 
-Each module reads from the previous. Skip the order and you redo work.
+The non-Ivy folders are **instructions, not build kits**. They tell you what good looks like so you can build it. The full methodology, prompts, and integration code is what we run for Sprint clients.
 
-## Stack assumed
+[`BUILD-ORDER.md`](./BUILD-ORDER.md) — the order to run the modules in, with gates between each.
 
-- **GitHub** for source
-- **Netlify** for hosting + auto-deploy on every push
-- **Astro + Tailwind + pnpm** (React for interactive components only)
-- **GoHighLevel** for CRM
-- **Claude** (claude.ai for chat, Claude Code for in-repo work)
-- **Microsoft Clarity, Google Search Console, GA4** for tracking
+## Why Ivy is the one full skill
 
-Swap any of these. The prompts read from `config.json`, not from hardwired tool names.
+Outbound citations are one of the strongest AI-search ranking signals. Princeton + Georgia Tech research (2025) shows citation pages get +30-40% more AI visibility. Ivy is the working skill that manages this end-to-end — config, prompts, templates, and audit.
+
+Use it on every blog post you publish.
 
 ## Getting started
 
 1. Click **Use this template** at the top of this repo
-2. Open the new copy in Claude Code (or your preferred editor)
-3. Fill out `intake.template.json` and rename to `intake.json`
-4. Start with `brain/` — paste `brain/prompts/01-brain-build.md` into Claude
-5. Move to `website/` once `brain/output/` has all 12 documents
+2. Read [`BUILD-ORDER.md`](./BUILD-ORDER.md)
+3. Open [`ivy/`](./ivy/) first — that's the one you can put to work immediately
+4. Use the other folders as a checklist for what to build next
+
+## Want the full build?
+
+We ship the entire seven-day Sprint for clients. Website, custom strategy, email sequences, Ivy, all of it wired together. **https://theagency.io/sprint**
 
 ## License
 
