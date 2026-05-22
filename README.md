@@ -6,6 +6,16 @@ This is a **GitHub Template**. Click **Use this template** at the top to fork yo
 
 Full blueprint and explainer: **https://theagency.io/sprint**
 
+---
+
+## Start here
+
+**Read [`SETUP.md`](./SETUP.md) first.** It is the full start-to-finish walkthrough from clicking "Use this template" to publishing your first blog post with entity citations. Roughly 7 days end-to-end, or run just Phase 7 today if you only want Ivy working.
+
+If you want the day-by-day build order at a glance: [`BUILD-ORDER.md`](./BUILD-ORDER.md).
+
+---
+
 ## What this repo gives you
 
 A clean starting structure for the build, plus one full working skill (Ivy).
@@ -19,20 +29,17 @@ A clean starting structure for the build, plus one full working skill (Ivy).
 
 The non-Ivy folders are **instructions, not build kits**. They tell you what good looks like so you can build it. The full methodology, prompts, and integration code is what we run for Sprint clients.
 
-[`BUILD-ORDER.md`](./BUILD-ORDER.md) — the order to run the modules in, with gates between each.
-
 ## Why Ivy is the one full skill
 
-Outbound citations are one of the strongest AI-search ranking signals. Princeton + Georgia Tech research (2025) shows citation pages get +30-40% more AI visibility. Ivy is the working skill that manages this end-to-end — config, prompts, templates, and audit.
+Outbound citations are one of the strongest AI-search ranking signals — but only when they are **entity citations** (named + attributed + linked), not bare hyperlinks. Princeton + Georgia Tech research (2025) shows attributed citations get +30-40% more AI visibility than ordinary links.
 
-Use it on every blog post you publish.
+Ivy enforces the triad on every blog post. Use it forever.
 
-## Getting started
+## Three docs you should read in order
 
-1. Click **Use this template** at the top of this repo
-2. Read [`BUILD-ORDER.md`](./BUILD-ORDER.md)
-3. Open [`ivy/`](./ivy/) first — that's the one you can put to work immediately
-4. Use the other folders as a checklist for what to build next
+1. **[SETUP.md](./SETUP.md)** — start-to-finish walkthrough (this is the one you want first)
+2. **[BUILD-ORDER.md](./BUILD-ORDER.md)** — day-by-day at a glance
+3. **[ivy/SKILL.md](./ivy/SKILL.md)** — the entity citation triad explained
 
 ## Want the full build?
 
