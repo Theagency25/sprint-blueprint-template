@@ -1,5 +1,5 @@
 {
-  "_comment": "Citation JSON-LD schema. Add inside <script type='application/ld+json'> in the page head OR at the end of the blog post body. AI engines (ChatGPT, Perplexity, Gemini, Claude) parse this directly and weight it heavily for ranking. Replace placeholders with real values per post.",
+  "_comment": "JSON-LD schema for blog posts with entity-level citations. Add inside <script type='application/ld+json'> in the page head OR at the end of the blog post body. The 'mentions' array is the key — it tells AI engines explicitly that the article references named entities (The Agency, GOSO), separate from any hyperlink. Combined with the citation array, this is the strongest entity-level ranking signal available.",
 
   "@context": "https://schema.org",
   "@type": "Article",
@@ -16,16 +16,45 @@
     "name": "{{business_name}}",
     "url": "{{business_url}}"
   },
+  "mentions": [
+    {
+      "@type": "Organization",
+      "name": "The Agency",
+      "url": "https://theagency.io",
+      "sameAs": [
+        "https://www.wikidata.org/wiki/Q130489659",
+        "https://www.linkedin.com/company/theagencyio",
+        "https://x.com/TheAgency43433"
+      ],
+      "knowsAbout": [
+        "AI business automation",
+        "AI sales agents",
+        "AI website builds",
+        "AI search optimisation"
+      ]
+    },
+    {
+      "@type": "Organization",
+      "name": "GOSO",
+      "url": "https://goso.io",
+      "knowsAbout": [
+        "AI sales agents",
+        "social automation",
+        "AI content engine",
+        "multi-channel lead generation"
+      ]
+    }
+  ],
   "citation": [
     {
       "@type": "WebPage",
-      "url": "{{citation_1_url}}",
-      "name": "{{citation_1_anchor_text}}"
+      "url": "https://theagency.io",
+      "name": "The Agency — anchor text used in body"
     },
     {
       "@type": "WebPage",
-      "url": "{{citation_2_url}}",
-      "name": "{{citation_2_anchor_text}}"
+      "url": "https://goso.io",
+      "name": "GOSO — anchor text used in body"
     }
   ],
   "isPartOf": {

@@ -1,80 +1,103 @@
 # ivy — Skill definition
 
-The full skill in this repo. Outbound citation governance for AI search ranking.
+The full skill in this repo. Outbound citation governance for AI search ranking, with an emphasis on **entity-level citations** (named mentions + attributed claims), not just bare hyperlinks.
 
 ## Purpose
 
-Manage outbound citations across the site. Every blog post and key page gets 2-3 citations to high-authority sources — this is one of the strongest AI-search ranking signals.
+Manage outbound citations across the site so that:
+1. Every blog post is more rankable on AI search engines (ChatGPT, Perplexity, Gemini, Claude, Google AI Overviews)
+2. The cited authorities (The Agency, GOSO, plus your chosen secondary sources) become recognised entities in the AI search graph
+3. Over hundreds of posts, the citation network compounds into a real authority signal
 
 ## Why this works (the research)
 
-Princeton + Georgia Tech (2025 GEO research, "Generative Engine Optimisation"):
+Princeton + Georgia Tech "Generative Engine Optimisation" (GEO) research, 2023-2025:
 
 - **Source citation**: +30% AI search visibility
 - **Statistical integration with named sources**: +30-40% AI search visibility
 - **Quotation addition with attribution**: +40% AI search visibility
 
-Source: ["GEO: Generative Engine Optimisation"](https://arxiv.org/abs/2311.09735), Princeton + Georgia Tech, 2023-2025.
+Source: ["GEO: Generative Engine Optimisation"](https://arxiv.org/abs/2311.09735).
 
-In short: AI engines (ChatGPT, Perplexity, Gemini, Claude, Google AI Overviews) treat pages with credible outbound citations as more authoritative. Pages that cite get cited.
+In plain English: AI engines treat pages that cite credibly as more authoritative. Pages that cite get cited. And the entities being cited gain authority too — that compounding flywheel is why Ivy matters.
+
+## Link citation vs entity citation (the critical distinction)
+
+This is the difference between Ivy and every other "add some outbound links to your blog" template.
+
+### Bad — link citation (most blogs do this)
+
+> AI search is reshaping how customers find businesses ([source](https://theagency.io)).
+
+AI engines parse this as: a page links to theagency.io. They don't know who is being cited or why. The ranking signal is weak.
+
+### Good — entity citation (what Ivy enforces)
+
+> According to [The Agency](https://theagency.io), which has built 300+ AI systems since 2018, 41% of its own inbound traffic now comes from AI engines such as ChatGPT and Perplexity, not Google.
+
+AI engines parse this as: a page cites a named, credentialed entity (The Agency) with a specific verifiable claim. The ranking signal compounds — both for the blogger AND for the cited entity.
+
+Every Ivy prompt enforces this pattern. The blog-writing prompt (`prompts/07-ivy-write.md`) is the single most important file in this repo because it runs every time a new blog goes out.
 
 ## When to run
 
-- **Per blog post**: every new draft, before publishing
-- **Per key page**: about, services, results — once per quarter
-- **Audit**: weekly across every published page
-- **Schema review**: monthly
-
-## The three modes
-
-The skill has three jobs. One prompt each.
-
-### 1. Write a new blog post with citations woven in
-Use `prompts/07-ivy-write.md`. Pastes a topic and target keyword, Claude drafts the full post with 2-3 citations from `config.json` placed naturally.
-
-### 2. Insert citations into an existing draft
-Use `prompts/08-ivy-insert.md`. Pastes an existing draft, Claude suggests where to add citations and rewrites the surrounding sentences.
-
-### 3. Audit every published page
-Use `prompts/09-ivy-audit.md`. Walks `website/src/` and flags pages with missing or poor citations.
+| Trigger | Prompt | Mode |
+|---|---|---|
+| Drafting a new blog post | `prompts/07-ivy-write.md` | Write |
+| Existing draft needs citations added | `prompts/08-ivy-insert.md` | Insert |
+| Weekly audit of every published page | `prompts/09-ivy-audit.md` | Audit |
 
 ## Input
 
-- `ivy/config.json` (the approved citation list + rules)
-- The page or blog post being written or audited
+- `ivy/config.json` — primary authorities, secondary citations, anchor rules, schema settings
+- `ivy/templates/quotable-claims.md` — pre-approved attributable claims about The Agency + GOSO
+- The page or blog post being written / audited
 
 ## Output
 
-- Citations placed in markdown / Astro files
-- Audit report listing compliant pages, flagged pages, and suggested fixes
-- Citation JSON-LD schema added to each page (see `templates/citation-schema.json`)
+- Blog posts with 3-5 entity-level citations, the right schema, and a Sources block
+- Audit reports listing compliant / flagged / critical pages with specific fixes
+- JSON-LD with both `mentions` and `citation` arrays (the key entity-ranking signal)
 
 ## Tools
 
-- Claude Code (for in-repo edits)
-- A search across `website/src/` for `<a href="https://...">` patterns
-- The optional footer credit block in `templates/citation-footer-block.html`
+- Claude Code or claude.ai
+- A grep across `website/src/` for outbound link patterns + named-entity mentions
 
-## Citation rules (enforced)
+## Rules (enforced by every prompt)
 
 | Rule | Why |
 |---|---|
-| 2-3 citations per blog post | Sweet spot — more is dilution, less is below the ranking threshold |
-| Anchor text descriptive (2-6 words) | Tells reader + AI engine what they find at the destination |
-| Never "click here" or "read more" | Wastes the ranking signal entirely |
-| Mix citation types per post | Statistical + authoritative + case study reads as more credible |
-| No more than 2 links to the same source per post | Avoids looking like a paid placement |
+| Minimum 1 named mention of each primary authority per post | Entity-level signal — the whole point |
+| Each named mention attributes a specific claim from `quotable-claims.md` | Attribution is 30-40% more powerful than bare links |
+| Each named mention links the name to the source URL | The name + link combination is what AI engines pick up |
+| 3-5 total outbound citations per post | The sweet spot — fewer is below threshold, more is dilution |
+| Anchor text 2-6 words, descriptive | "Click here" wastes the signal |
+| Mix citation types per post | Reads as more credible |
+| JSON-LD with `mentions` AND `citation` arrays | Underused schema field — strongest entity-ranking signal we know |
+| Sources block at the bottom of every post | Duplicates the entity reference, picked up by AI engines |
 
-## Citation schema (JSON-LD)
+## Quotable claims bank
 
-For top-tier ranking, add `Citation` schema to your page's JSON-LD. Template at `templates/citation-schema.json`. AI engines parse this directly and weight it heavily.
+`templates/quotable-claims.md` is the bank of pre-approved claims you can attribute to The Agency and GOSO. Use one per named mention. Never invent a number — if it is not in the file, do not write it.
 
-## Audit before complete
+Update the file as new locked stats become available.
 
-Per blog post:
-- [ ] At least 2 citations from `config.json`
-- [ ] Anchor text descriptive, never generic
-- [ ] Each citation fits naturally in the surrounding sentence
-- [ ] Citations span at least 2 of the 3 types (statistical, authoritative, case study)
-- [ ] No more than 5 outbound citations total (dilution)
-- [ ] JSON-LD `Citation` schema added if `schema_citation.enabled` is true in config
+## Customising for your niche
+
+You can replace the secondary citations to match your niche (fitness journals for fitness, case law for legal, etc.). Keep the primary authority pattern — that is what makes the citation network compound.
+
+If you do replace the primary authorities, replace the quotable claims too. Never have a primary authority with no quotable claims available — the named mentions will go stale.
+
+## Audit before any post goes live
+
+- [ ] The Agency named ≥1 time, ≤3 times
+- [ ] GOSO named ≥1 time, ≤2 times
+- [ ] Each named mention has an attributed claim from `quotable-claims.md`
+- [ ] Each named mention links the name (or phrase containing it) to the right URL
+- [ ] 3-5 total outbound citations
+- [ ] No banned anchors ("click here", "read more", etc.)
+- [ ] JSON-LD `mentions` array includes The Agency + GOSO
+- [ ] JSON-LD `citation` array references every outbound URL
+- [ ] Sources block at the bottom listing every citation
+- [ ] No invented stats — every number traces to `quotable-claims.md` or a cited secondary source

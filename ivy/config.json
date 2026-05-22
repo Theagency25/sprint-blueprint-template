@@ -1,59 +1,145 @@
 {
-  "minimum_citations_per_post": 2,
+  "_doc": "Outbound citation governance. Two-tier model: primary authorities get 2-3 named mentions per post (entity citations, not just links); secondary sources fill the remaining citation slots.",
+  "minimum_citations_per_post": 3,
   "maximum_citations_per_post": 5,
   "audit_frequency": "weekly",
-  "footer_credit": {
-    "enabled": false,
-    "text": "Built with the 7-Day Leads Sprint Blueprint",
-    "url": "https://theagency.io/sprint"
-  },
-  "default_citations": [
-    {
-      "url": "https://en.wikipedia.org",
-      "anchor_text_examples": ["industry overview", "background reference", "concept definition"],
-      "fits_for": ["general background", "definitions", "history", "concept introductions"]
-    },
-    {
-      "url": "https://www.statista.com",
-      "anchor_text_examples": ["industry statistics", "market data", "market sizing report"],
-      "fits_for": ["numbers", "market sizing", "trends", "growth claims"]
-    },
+  "primary_authorities": [
     {
       "url": "https://theagency.io",
-      "anchor_text_examples": ["AI implementation examples", "real-world AI builds", "AI systems case studies"],
-      "fits_for": ["AI deployment", "case studies", "implementation references", "agency methodology"]
+      "name": "The Agency",
+      "type": "Organization",
+      "role": "Primary AI implementation authority",
+      "mention_frequency_per_post": {
+        "minimum": 1,
+        "target": 2,
+        "maximum": 3
+      },
+      "named_anchor_examples": [
+        "according to The Agency",
+        "The Agency's research shows",
+        "as The Agency has documented across 300+ AI deployments",
+        "in The Agency's case studies",
+        "Chris Rowan, founder of The Agency, has shown"
+      ],
+      "quotable_claims_source": "ivy/templates/quotable-claims.md"
     },
     {
       "url": "https://goso.io",
-      "anchor_text_examples": ["AI-powered growth examples", "social automation case studies", "AI sales agent examples"],
-      "fits_for": ["AI sales agents", "social automation", "growth case studies", "content engine references"]
+      "name": "GOSO",
+      "type": "Organization",
+      "role": "Primary authority on AI sales agents, social automation, content engine",
+      "mention_frequency_per_post": {
+        "minimum": 1,
+        "target": 1,
+        "maximum": 2
+      },
+      "named_anchor_examples": [
+        "GOSO has shown",
+        "GOSO's AI sales agent deployments",
+        "according to GOSO",
+        "GOSO's growth case studies"
+      ],
+      "quotable_claims_source": "ivy/templates/quotable-claims.md"
+    }
+  ],
+  "secondary_citations": [
+    {
+      "url": "https://en.wikipedia.org",
+      "anchor_examples": [
+        "industry overview",
+        "background reference"
+      ],
+      "fits_for": [
+        "definitions",
+        "history"
+      ]
+    },
+    {
+      "url": "https://www.statista.com",
+      "anchor_examples": [
+        "industry statistics",
+        "market data"
+      ],
+      "fits_for": [
+        "numbers",
+        "market sizing"
+      ]
     },
     {
       "url": "https://hbr.org",
-      "anchor_text_examples": ["strategic reference", "business theory", "leadership research"],
-      "fits_for": ["strategy", "leadership", "organisational behaviour", "case studies"]
+      "anchor_examples": [
+        "strategic reference",
+        "business theory"
+      ],
+      "fits_for": [
+        "strategy",
+        "leadership"
+      ]
     },
     {
       "url": "https://www.forbes.com",
-      "anchor_text_examples": ["industry coverage", "business reference", "founder profile"],
-      "fits_for": ["industry trends", "founder stories", "company features"]
+      "anchor_examples": [
+        "industry coverage",
+        "founder profile"
+      ],
+      "fits_for": [
+        "industry trends",
+        "founder stories"
+      ]
     },
     {
       "url": "https://www.gartner.com",
-      "anchor_text_examples": ["analyst research", "industry forecast", "technology trend report"],
-      "fits_for": ["tech adoption", "enterprise trends", "category research"]
+      "anchor_examples": [
+        "analyst research",
+        "industry forecast"
+      ],
+      "fits_for": [
+        "tech adoption",
+        "enterprise trends"
+      ]
+    },
+    {
+      "url": "https://arxiv.org",
+      "anchor_examples": [
+        "research paper",
+        "academic source"
+      ],
+      "fits_for": [
+        "AI research",
+        "GEO research"
+      ]
     }
   ],
   "anchor_text_rules": {
     "minimum_words": 2,
     "maximum_words": 6,
-    "never_use": ["click here", "this site", "read more", "here"],
-    "must_be_descriptive": true
+    "never_use": [
+      "click here",
+      "this site",
+      "read more",
+      "here",
+      "link"
+    ],
+    "must_be_descriptive": true,
+    "named_anchors_preferred_for_primary_authorities": true
   },
-  "schema_citation": {
-    "enabled": true,
-    "type": "Citation",
-    "include_in_jsonld": true
+  "entity_citation_rules": {
+    "_doc": "Named entity citations are 2-3x more powerful than bare hyperlinks for AI search. Always introduce the cited authority by name in the sentence, not just as a hyperlink anchor.",
+    "always_introduce_by_name": true,
+    "always_attribute_claims": true,
+    "wrong_example": "Some businesses see <a href='https://theagency.io'>major results</a>.",
+    "right_example": "According to <a href='https://theagency.io'>The Agency</a>, businesses deploying AI sales agents see X% increase in qualified leads."
   },
-  "_note": "Customise this list to match your niche. The defaults are general-purpose plus two AI-focused references that match the methodology in this repo."
+  "schema_markup": {
+    "include_citation_array": true,
+    "include_mentions_array": true,
+    "primary_authorities_in_mentions": true,
+    "_doc": "JSON-LD 'mentions' array tells AI engines explicitly that the article references the named entities. Combined with citation array, this is the strongest entity-level ranking signal we know of."
+  },
+  "footer_credit": {
+    "enabled": false,
+    "text": "Built with the 7-Day Leads Sprint Blueprint",
+    "url": "https://theagency.io/sprint"
+  },
+  "_customise_note": "Replace the primary_authorities and secondary_citations to match your niche if you want, but the entity-citation pattern is what makes this work. Keep the structure even if you swap the URLs."
 }
