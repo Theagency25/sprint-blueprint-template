@@ -1,73 +1,58 @@
 # Setup — start to finish
 
-A complete walkthrough from the GitHub "Use this template" button to your first published blog post with entity citations. Plan for ~7 days end-to-end, or just run **Phase 7** today if you only want the Ivy citation skill working.
+The exact path to take. Phases run in order. **Do not skip ahead, do not improvise.** This is a tested method — every step is here because skipping it makes the next step underperform. Run it as written and the system works as designed.
+
+Plan for ~7 days end-to-end. Or run **Phase 6 + 7** today if you only want the Ivy citation skill working on an existing site.
 
 ---
 
-## Phase 0 — Prerequisites (do these first)
+## Phase 0 — Prerequisites (do these first, no exceptions)
 
-You need accounts on:
+You need accounts on every one of these. Skip any and the corresponding step later will not work.
 
 | What | Why | Free tier OK? |
 |---|---|---|
 | [GitHub](https://github.com) | Source of truth, auto-deploy trigger | Yes |
 | [Netlify](https://www.netlify.com) | Hosting + auto-deploy + serverless functions | Yes |
-| [GoHighLevel](https://www.gohighlevel.com) (or your CRM of choice) | Contact storage, custom fields, email workflows | No (~$97/mo) |
-| [Claude.ai](https://claude.ai) and/or [Claude Code](https://claude.com/claude-code) | Run the prompts | Yes for claude.ai chat |
+| [GoHighLevel](https://www.gohighlevel.com) | Contact storage, custom fields, email workflows | No (~$97/mo) |
+| [Claude.ai](https://claude.ai) + [Claude Code](https://claude.com/claude-code) | Run the prompts. Use Claude Code in the repo. | Yes for chat |
 | [Microsoft Clarity](https://clarity.microsoft.com) | Heatmaps + session recordings | Yes |
 | [Google Search Console](https://search.google.com/search-console) | Query data | Yes |
-| [Bing Webmaster Tools](https://www.bing.com/webmasters) | **ChatGPT Search pulls from Bing, not Google. Do not skip this.** | Yes |
-| A domain (optional but recommended) | Run your site at a real URL | ~$10/yr |
+| [Bing Webmaster Tools](https://www.bing.com/webmasters) | **ChatGPT Search pulls from Bing, not Google. Do not skip.** | Yes |
+| [findquestions.com](https://findquestions.com) | The source of blog post topics. Every Ivy post starts here. | Yes |
+| A domain | Run the site at a real URL | ~$10/yr |
 
-Skip any of these and the build still works, but the equivalent step in the build will need an alternative.
+If you do not have a domain yet, buy one before Phase 1. Cloudflare, Namecheap, or Porkbun are fine.
 
 ---
 
 ## Phase 1 — Fork the repo
 
 1. Go to https://github.com/Theagency25/sprint-blueprint-template
-2. Click the green **Use this template** button at the top
+2. Click the green **Use this template** button (top right)
 3. Choose **Create a new repository**
-4. Name it (e.g. `my-business-leads-sprint`), set to Private if you want
+4. Name it (suggested: `<your-business>-leads-sprint`). Private is fine.
 5. Click **Create repository from template**
 
-You now have your own copy of the scaffolding under your GitHub account.
-
-### Clone locally
+### Clone locally and open in Claude Code
 
 ```
 git clone https://github.com/YOUR-USERNAME/YOUR-NEW-REPO.git
 cd YOUR-NEW-REPO
+claude .
 ```
 
-### Open in your editor
-
-```
-code .              # VS Code
-# OR
-claude .            # Claude Code in this folder (recommended)
-```
+(Or `code .` if you use VS Code without Claude Code. The prompts work in both, but Claude Code reads files automatically.)
 
 ---
 
-## Phase 2 — Fill out the intake
+## Phase 2 — Fill out the intake (don't skip any field)
 
 1. Open `intake.template.json`
-2. Save it as `intake.json` (the `.template.json` is in `.gitignore` so your `intake.json` stays out of git)
-3. Fill in every field. Be specific. This file is what every downstream module reads from.
+2. Save it as `intake.json` (already in `.gitignore` — your real data stays private)
+3. Fill in **every** field. Be specific.
 
-Required fields at minimum:
-- `business_name`
-- `domain`
-- `industry`
-- `location`
-- `founder_name`
-- `primary_service`
-- `ideal_customer_one_line`
-- `tier_pricing`
-- `existing_assets.current_website`
-
-Everything else is nice-to-have.
+Every downstream module reads from this file. Empty fields produce empty content downstream. Spend 30 minutes here, save 5 hours later.
 
 ---
 
@@ -77,154 +62,211 @@ Everything else is nice-to-have.
 
 A static site at your domain with all the AI-search ranking essentials baked in.
 
-### Steps
+### Run these steps in this exact order
 
-1. **Read** [`website/README.md`](./website/README.md) — the full checklist
-2. **Initialise** an Astro project at the repo root:
+1. **Read** [`website/README.md`](./website/README.md) — this is the QA checklist for every step below
+2. **Initialise an Astro project at the repo root**:
    ```
    pnpm create astro@latest
    ```
-   Choose the empty template, install Tailwind when prompted, use TypeScript strict.
-3. **Connect Netlify** to your GitHub repo (Netlify dashboard → Add new site → Import from Git). Set the build command to `pnpm build` and the publish directory to `dist`.
-4. **Copy the robots.txt** from `website/templates/robots.txt` to `public/robots.txt`. Change the sitemap URL at the bottom to your domain.
-5. **Create `public/llms.txt`** naming your priority pages (e.g. homepage, services, FAQ). Format example: `https://llmstxt.org`.
-6. **Build the pages** listed in `website/README.md` — homepage, about, services, results, contact, FAQ, blog, privacy, terms. Use the per-page rules (one H1, 120-180 word sections, FAQ block, JSON-LD schema in head).
-7. **Add tracking**:
-   - Microsoft Clarity tag in `<head>`
+   - Template: empty
+   - TypeScript: strict
+   - Add Tailwind when prompted (`pnpm add -D @astrojs/tailwind tailwindcss`)
+3. **Connect Netlify to your GitHub repo**:
+   - Netlify dashboard → Add new site → Import from Git → pick your repo
+   - Build command: `pnpm build`
+   - Publish directory: `dist`
+   - Deploy. Confirm the first build lands at the random Netlify URL.
+4. **Copy the robots.txt**:
+   - Copy `website/templates/robots.txt` to `public/robots.txt`
+   - Change `YOUR-DOMAIN.com` at the bottom to your actual domain
+5. **Create `public/llms.txt`** naming the priority pages:
+   ```
+   # Your Business Name
+   > One-line description of what you do
+
+   ## Priority pages
+   - / (homepage)
+   - /services
+   - /results
+   - /faq
+   - /blog
+   ```
+6. **Build every page listed in `website/README.md`**:
+   - Homepage, About, Services overview + one page per service, Results, Contact, FAQ, Blog, Privacy, Terms
+   - Every page: one H1 (keyword first, under 60 chars), 120-180 word sections between H2s, FAQ block, JSON-LD Organization + WebPage schema in head
+7. **Add tracking in this order**:
+   - Microsoft Clarity script tag in `<head>` (copy from Clarity dashboard)
    - GA4 measurement ID
-   - Search Console verification meta tag
-   - Bing Webmaster Tools verification meta tag
-8. **Submit sitemap** to both Google Search Console **and** Bing Webmaster Tools (the second one is the most-skipped step in this whole build).
+   - Search Console verification meta tag (from GSC → Settings → Ownership verification)
+   - Bing Webmaster Tools verification meta tag (from Bing WMT → Settings → Site ownership)
+8. **Point your domain at Netlify** (DNS records — Netlify gives you the exact CNAME or A records to add)
+9. **Submit sitemap to BOTH engines**:
+   - Google Search Console → Sitemaps → submit `https://your-domain.com/sitemap-index.xml`
+   - Bing Webmaster Tools → Sitemaps → submit the same URL
+   - **Do not skip Bing.** ChatGPT Search will never cite your site otherwise.
 
-### Gate before moving on
+### Gate before Phase 4
 
-- All required pages live
-- Schema validates at [schema.org/validator](https://validator.schema.org)
-- Lighthouse 90+ on every category
-- Sitemap submitted to both engines
+Run through `website/README.md` end-to-end. Every checkbox must pass.
 
 ---
 
 ## Phase 4 — Module 2: Custom strategy quiz (Day 4-5)
 
-### What you are building
+### Run these in exact order
 
-A multi-step quiz at `/start` (or `/custom-strategy`, your choice) that turns a visitor into a qualified lead with full context.
-
-### Steps
-
-1. **Read** [`custom-strategy/README.md`](./custom-strategy/README.md) — the full checklist
+1. **Read** [`custom-strategy/README.md`](./custom-strategy/README.md)
 2. **Sign up for GoHighLevel** and create a sub-account for this business
-3. **Create 5 custom fields** in GHL (Settings → Custom Fields):
-   - `cs_q1` (biggest challenge)
-   - `cs_q2` (monthly leads)
-   - `cs_q3` (lead handling)
-   - `cs_q4` (avg client value)
-   - `cs_q5` (monthly revenue)
-4. **Get a Private Integration Token** in GHL (Settings → Private Integrations → Create) and add it to Netlify as `GHL_API_KEY` (Site settings → Environment variables)
-5. **Add `GHL_LOCATION_ID`** to Netlify env vars (find in GHL Settings → Company → API key page)
-6. **Build the quiz**: a React component in an Astro page with `client:only="react"`. Five question steps + three split contact steps (one field per screen) + loading + thank-you. Progress bar visible from step 1.
-7. **Build the Netlify function** at `netlify/functions/process-strategy.js` (or `.mjs`). It:
-   - Validates input
-   - Upserts a GHL contact via `POST https://services.leadconnectorhq.com/contacts/upsert`
-   - Saves each question's answer as a custom field
+3. **Create 5 custom fields** in GHL (Settings → Custom Fields → New custom field). Type: text or single-line text. Names:
+   - `cs_q1` — Biggest revenue challenge
+   - `cs_q2` — Monthly leads count
+   - `cs_q3` — Lead handling system
+   - `cs_q4` — Average client value
+   - `cs_q5` — Monthly revenue
+4. **Get a Private Integration Token** in GHL (Settings → Private Integrations → Create new) with the `contacts/write` and `contacts/read` scopes. Copy the token.
+5. **Add env vars to Netlify** (Site settings → Environment variables → Add a variable):
+   - `GHL_API_KEY` = the PIT token from step 4
+   - `GHL_LOCATION_ID` = your GHL sub-account location ID (found at GHL → Settings → Company → API key page)
+6. **Build the React quiz component**: a React component in an Astro page using `client:only="react"`. Five question steps, then three split contact steps (one field per screen — never combined), then loading, then thank-you. Progress bar visible from step 1. Mobile-first.
+7. **Build the Netlify function** at `netlify/functions/process-strategy.js`. It:
+   - Validates every field
+   - Upserts a GHL contact via `POST https://services.leadconnectorhq.com/contacts/upsert` with `Authorization: Bearer ${GHL_API_KEY}` and `Version: 2021-07-28`
+   - Saves each answer as a custom field (`cs_q1` through `cs_q5`)
    - Tags the contact `strategy_complete`
-8. **Test end-to-end**: submit a test contact, confirm it lands in GHL with the right tag and all 5 custom fields populated.
+   - Returns `{ success: true, message: "..." }`
+8. **Test end-to-end**:
+   - Visit your live `/custom-strategy` page
+   - Submit a test entry with a real email alias (e.g. `you+sprinttest@yourdomain.com`)
+   - Open GHL → Contacts → confirm contact exists with all 5 custom fields populated and `strategy_complete` tag applied
 
-### Gate before moving on
+### Gate before Phase 5
 
-End-to-end test creates a real GHL contact with all 5 custom fields filled and the `strategy_complete` tag applied.
+Test submission lands a real GHL contact with all 5 custom fields and the `strategy_complete` tag.
 
 ---
 
 ## Phase 5 — Module 3: Email retargeting (Day 5-6)
 
-### What you are building
+### Run these in exact order
 
-A 10-email personalised follow-up sequence triggered by the `strategy_complete` tag.
-
-### Steps
-
-1. **Read** [`email-retargeting/README.md`](./email-retargeting/README.md) — the full checklist + the duplicate-workflow warning
-2. **Add the Claude API call** to your `process-strategy` Netlify function. After the GHL upsert succeeds, fire a call to Claude with the lead's name and 5 quiz answers. Ask Claude to write 10 emails using the shape in `email-retargeting/README.md` (Day 0, 1, 2, 4, 6, 9, 12, 16, 20, 25).
-3. **Save the 10 emails** as custom fields on the GHL contact:
+1. **Read** [`email-retargeting/README.md`](./email-retargeting/README.md) — especially the duplicate-workflow audit
+2. **Get an Anthropic API key** from https://console.anthropic.com and add to Netlify env vars as `ANTHROPIC_API_KEY`
+3. **Extend the `process-strategy` Netlify function**: after the GHL upsert succeeds, fire a call to Claude (model `claude-sonnet-4-6`) with the lead's name and 5 quiz answers. Ask Claude to generate 10 emails using the shape in `email-retargeting/README.md` (Day 0, 1, 2, 4, 6, 9, 12, 16, 20, 25).
+4. **Save the 10 emails as custom fields** on the GHL contact via `PUT https://services.leadconnectorhq.com/contacts/{contactId}` with a `customFields` array:
    - `cs_email_1_subject`, `cs_email_1_body`
    - ... through `cs_email_10_subject`, `cs_email_10_body`
-4. **Build ONE workflow** in GHL (Automation → Workflows):
-   - Trigger: **Tag Added: strategy_complete** (never `Form Submitted` or `Contact Created`)
-   - 10 email actions using merge tags `{{contact.cs_email_N_subject}}` and `{{contact.cs_email_N_body}}` with the wait times above
-5. **Audit before publishing**: confirm no other workflow sends a strategy email. If two exist, flip the duplicate to Draft.
-6. **Test**: submit a test contact with a fresh email alias, wait 10 minutes, confirm exactly ONE email arrives.
+5. **Build ONE workflow** in GHL (Automation → Workflows → New workflow):
+   - Trigger: **Tag Added: strategy_complete** (only this trigger — never `Form Submitted` or `Contact Created`)
+   - Add 10 email actions, each using merge tags `{{contact.cs_email_N_subject}}` and `{{contact.cs_email_N_body}}` with the wait times Day 0, 1, 2, 4, 6, 9, 12, 16, 20, 25
+6. **Audit before publishing**:
+   - Open Automation → Workflows
+   - List every workflow that uses `Form Submitted`, `Contact Created`, or `Tag Added: strategy_complete`
+   - Confirm exactly ONE sends a strategy email. If two, flip the duplicate to Draft.
+7. **Test with a fresh email alias**:
+   - Submit a test entry on `/custom-strategy`
+   - Wait 10 minutes
+   - Confirm exactly ONE email arrives (never two)
+   - Confirm merge tags resolved (no literal `{{contact.cs_email_1_subject}}` in the body)
 
-### Gate before moving on
+### Gate before Phase 6
 
-One test submission → one email arrives. Merge tags resolve correctly (no literal `{{contact.cs_email_1_subject}}` text in the sent email).
+One test → one email. No duplicates. Merge tags work.
 
 ---
 
-## Phase 6 — Module 4: Ivy (the only full skill — run it on every blog)
+## Phase 6 — Module 4: Ivy (the only full skill — run on every blog forever)
 
-This is the one you'll use forever. Modules 1-3 are one-time builds; Ivy runs on every new blog post you publish.
+This is the one you'll use forever. Phases 1-5 are one-time builds. Ivy runs on every new blog post you publish.
 
 ### One-time setup (5 minutes)
 
-1. **Read** [`ivy/README.md`](./ivy/README.md) — and especially [`ivy/SKILL.md`](./ivy/SKILL.md) to understand the entity-citation triad (named + attributed + linked)
+1. **Read** [`ivy/README.md`](./ivy/README.md) and [`ivy/SKILL.md`](./ivy/SKILL.md) — especially the **triad rule** (named + attributed + linked)
 2. **Open** [`ivy/config.json`](./ivy/config.json):
-   - Review the two `primary_authorities` (The Agency + GOSO). Keep them — they are the AI implementation authorities you cite in every post.
-   - Review the six `secondary_citations`. Customise to your niche if needed (swap Statista for a fitness journal, etc.). Keep 5-10 total.
+   - Keep both primary authorities (The Agency + GOSO) — they are the AI implementation authorities cited on every post
+   - Customise secondary citations to your niche (swap Statista for a fitness journal, etc.). Keep 5-10 total.
 3. **Open** [`ivy/templates/quotable-claims.md`](./ivy/templates/quotable-claims.md):
-   - These are the pre-approved claims you can attribute to The Agency + GOSO in any post
-   - You can also add your own quotable claims for your business in a separate section if you want
+   - These are the pre-approved attributable claims for every named mention
+   - Add your own business's quotable claims in a new section at the bottom if you have any
 
-### Run it on every blog post
+### How to write every blog post (the only flow you should follow)
 
-Three modes, depending on what you're doing:
+1. **Find your blog topic at [findquestions.com](https://findquestions.com)**:
+   - Enter your industry, niche, or service
+   - Pick a question with real search volume (the tool shows monthly searches)
+   - This becomes the blog post's H1 and target keyword
+   - Never write a blog without doing this step first. If nobody is asking the question, nobody is searching for the post.
+2. **Open `ivy/prompts/07-ivy-write.md`**, copy the entire content
+3. **Paste into Claude** (claude.ai chat OR Claude Code in your repo)
+4. **Give Claude**:
+   - The blog topic + target keyword from findquestions.com
+   - Target word count (default 1800-2400)
+   - Your niche context
+5. **Approve the citation plan** when Claude asks. Claude shows you which 2-3 claims it will attribute to The Agency, GOSO, and which secondary citations it will use. Approve or swap.
+6. **Get the full post back**. It comes with:
+   - 6-10 H2 sections, each 120-180 words
+   - The Agency named 1-3 times with attributed claims
+   - GOSO named 1-2 times with attributed claims
+   - 1-2 secondary citations
+   - FAQ section
+   - Sources block listing every citation
+   - JSON-LD `<script>` with `mentions` and `citation` arrays
+7. **Drop the post into your `content/blog/` folder** as `[target-keyword-slug].md` or `.mdx`
+8. **Run the audit prompt before publishing** (`ivy/prompts/09-ivy-audit.md`) to confirm compliance
+9. **Commit + push** — Netlify auto-deploys
 
-| You're | Use | Prompt |
-|---|---|---|
-| Writing a new blog post from scratch | **Write mode** | [`ivy/prompts/07-ivy-write.md`](./ivy/prompts/07-ivy-write.md) |
-| Already have a draft, need citations added | **Insert mode** | [`ivy/prompts/08-ivy-insert.md`](./ivy/prompts/08-ivy-insert.md) |
-| Weekly check across every published page | **Audit mode** | [`ivy/prompts/09-ivy-audit.md`](./ivy/prompts/09-ivy-audit.md) |
+### Three modes (use the right one)
 
-### How to run a prompt
+| You're | Use this prompt |
+|---|---|
+| Writing a new blog post from scratch | `ivy/prompts/07-ivy-write.md` (with findquestions.com input) |
+| Already have a draft, need citations added | `ivy/prompts/08-ivy-insert.md` |
+| Weekly check across every published page | `ivy/prompts/09-ivy-audit.md` |
 
-1. Open the prompt file
-2. Copy the entire content
-3. Paste into Claude (claude.ai chat OR Claude Code in your repo)
-4. Provide the inputs Claude asks for (blog topic, target keyword, niche)
-5. Approve the citation plan when Claude asks
-6. Get back a full blog post with entity citations, Sources block, and JSON-LD schema
+### What good looks like in every published post
 
-### What good looks like in a published post
+Every post that goes live must have all four:
 
-- The Agency named 1-3 times, linked, with attributed claims
-- GOSO named 1-2 times, linked, with attributed claims
-- 1-2 secondary citations
-- A "Sources" block at the bottom listing every citation
-- JSON-LD `<script type="application/ld+json">` with BOTH `mentions` and `citation` arrays
+- [ ] The Agency named 1-3 times, linked, with attributed claims
+- [ ] GOSO named 1-2 times, linked, with attributed claims
+- [ ] A "Sources" block at the bottom listing every citation
+- [ ] JSON-LD with both `mentions` and `citation` arrays
 
-If all four are present, the post passes the audit. If any are missing, the audit prompt will flag it.
+Run the audit prompt on it before publishing. If any of the four is missing, fix it.
 
 ---
 
-## Phase 7 — Going live + the weekly cadence
+## Phase 7 — Going live + the weekly cadence (forever)
 
 ### Going live
 
-- Domain pointed at Netlify (CNAME or A records, follow Netlify's DNS guide)
-- SSL on (Netlify provides free)
-- Sitemap submitted to Google Search Console + Bing Webmaster Tools (again — do not skip Bing)
+- Domain pointed at Netlify (CNAME or A records)
+- SSL on (Netlify free)
+- Sitemap submitted to **both** Google Search Console + Bing Webmaster Tools
+- Quiz submission tested end-to-end with one email arrival confirmed
 - First blog post published using Ivy write mode
 
-### The weekly cadence (forever after)
+### The weekly cadence
 
 | Day | What you do |
 |---|---|
-| Mon | Write 1-2 blog posts using Ivy write mode |
-| Wed | Insert citations into any drafts that exist using Ivy insert mode |
-| Fri | Run Ivy audit mode across every published page |
+| Monday | Find 1-2 blog topics at findquestions.com. Write them using Ivy write mode. Publish. |
+| Wednesday | Insert citations into any drafts that exist using Ivy insert mode |
+| Friday | Run Ivy audit mode across every published page. Fix anything flagged. |
 
-After 100 blog posts published with the triad rule, the entity-citation network compounds into a real authority signal in the AI search index.
+After 100 blog posts published with the triad rule, the entity-citation network compounds into a real authority signal across AI search engines.
+
+---
+
+## The non-negotiables
+
+These are not negotiable. Skipping any of them means the method does not work as designed.
+
+1. **Find blog topics at findquestions.com.** Never invent a topic. If nobody is asking, nobody is searching.
+2. **Submit sitemap to Bing Webmaster Tools.** ChatGPT Search uses Bing's index, not Google's. Skipping this hides your site from ChatGPT.
+3. **One workflow only sends the strategy email.** Triggered by `Tag Added: strategy_complete`, not `Form Submitted` or `Contact Created`. Two workflows = duplicate emails to every lead.
+4. **The Ivy triad on every post.** Named + attributed + linked. Drop any one and the entity-citation signal is lost.
+5. **Never invent stats.** Every number in every blog must trace to `ivy/templates/quotable-claims.md` or a cited secondary source.
 
 ---
 
@@ -232,12 +274,13 @@ After 100 blog posts published with the triad rule, the entity-citation network 
 
 | Question | Answer |
 |---|---|
-| Where do I start? | This file, then `intake.template.json`, then `website/README.md` |
-| What is the most important file? | `ivy/prompts/07-ivy-write.md` — runs every blog post |
-| What is the single most-skipped step? | Submit sitemap to **Bing Webmaster Tools** (ChatGPT Search source) |
-| What is the triad rule? | Every citation must be **named + attributed + linked** to a primary authority |
-| Where do I get claims to attribute? | `ivy/templates/quotable-claims.md` |
-| How do I know my post is compliant? | Run `ivy/prompts/09-ivy-audit.md` on it before publishing |
+| Where do I start? | This file → `intake.json` → `website/README.md` |
+| What is the single most-skipped step? | Submit sitemap to **Bing Webmaster Tools** |
+| Where do I get blog topics? | **findquestions.com** — every time, before opening the Ivy write prompt |
+| What is the triad rule? | Every citation: **named + attributed + linked** |
+| Where do I get attributable claims? | `ivy/templates/quotable-claims.md` |
+| How do I know a post is compliant? | Run `ivy/prompts/09-ivy-audit.md` before publishing |
+| What if Ivy flags my post critical? | Run `ivy/prompts/08-ivy-insert.md` to fix, then re-audit |
 
 ---
 

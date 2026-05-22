@@ -10,10 +10,10 @@ Read these before writing a single sentence:
 
 ## What I'll give you
 
-- Blog post topic
-- Target keyword (the primary search query this post should rank for)
-- Target word count (default: 1800-2400 for a rankable blog post)
-- Niche / industry context
+- **Blog post topic** — pulled from [findquestions.com](https://findquestions.com). This is mandatory. Never write a blog without first finding a real question with real search volume. If nobody is asking it, nobody is searching for the post.
+- **Target keyword** — the primary search query from findquestions.com. Use as the H1 (keyword first).
+- **Target word count** — default 1800-2400 for a rankable blog post
+- **Niche / industry context** — what business this blog is for
 
 ## What you give back
 
